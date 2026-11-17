@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esma Unsal-Laratte</title>
+<meta name="description" content="Portfolio de design d'édition d'Esma Unsal-Laratte, Ph.D. : catalogue d'exposition, figures pour un ouvrage universitaire, identité imprimée, enseignement de la mise en page et de la chaîne graphique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a book laid flat. Narrow left margin column carries the running
+   heads and folios, the wide column carries the text block and the plates. */
+:root{
+  --paper:#f6f6f3;
+  --plate:#ffffff;
+  --ink:#16171a;
+  --ink-soft:#5b5e66;
+  --rule:#d5d6d1;
+  --accent:#d3161f;
+  --accent-ink:#ffffff;
+  --shadow:0 1px 2px rgba(20,22,26,.08),0 10px 30px rgba(20,22,26,.10);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --gutter:clamp(16px,4vw,48px);
+  --margin-col:11rem;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#141518;--plate:#1d1f23;--ink:#ecebe6;--ink-soft:#a3a6ad;--rule:#34373d;
+    --accent:#ff5a55;--accent-ink:#141518;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.45);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141518;--plate:#1d1f23;--ink:#ecebe6;--ink-soft:#a3a6ad;--rule:#34373d;
+  --accent:#ff5a55;--accent-ink:#141518;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:78rem;margin:0 auto;padding:0 var(--gutter)}
+
+/* small caps label used for running heads, spec terms, captions */
+.label{font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.label b{color:var(--accent);font-weight:700}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.4rem 2rem;padding-top:.8rem;padding-bottom:.8rem}
+.top .name{font-family:var(--display);font-weight:700;font-size:.95rem;text-decoration:none;letter-spacing:.01em}
+.top nav{display:flex;flex-wrap:wrap;gap:.2rem 1.4rem}
+.top nav a{font-family:var(--display);font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft)}
+.top nav a:hover{color:var(--accent)}
+
+/* opening */
+.opening{padding:clamp(2.5rem,7vw,5.5rem) 0 clamp(2rem,5vw,4rem)}
+.opening .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(1.5rem,5vw,4.5rem);align-items:end}
+.opening h1{font-size:clamp(2.6rem,7.2vw,5.6rem);font-weight:800;font-stretch:88%;line-height:.94;letter-spacing:-.02em;margin:1.2rem 0 1.6rem}
+.opening h1 em{font-style:normal;color:var(--accent)}
+.opening .lede{font-size:1.2rem;line-height:1.5;max-width:34em}
+.opening .cover{justify-self:end;max-width:21rem;width:100%}
+.reperes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);margin-top:clamp(2rem,5vw,3.5rem)}
+.reperes div{padding:1rem 1.25rem 0 0}
+.reperes div+div{border-left:1px solid var(--rule);padding-left:1.25rem}
+.reperes p{font-size:.95rem;line-height:1.45;margin-top:.45rem}
+
+/* sections */
+section{padding:clamp(2.5rem,6vw,5rem) 0;border-top:1px solid var(--rule)}
+.spread{display:grid;grid-template-columns:var(--margin-col) minmax(0,1fr);gap:clamp(1.25rem,3vw,3rem)}
+.margin{position:relative}
+.margin .stick{position:sticky;top:4.5rem;display:flex;flex-direction:column;gap:.5rem}
+.folio{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:3.6rem;line-height:.9;color:var(--accent);font-variant-numeric:tabular-nums}
+.block{min-width:0}
+.block h2{font-size:clamp(1.7rem,3.6vw,2.7rem);font-weight:750;font-stretch:92%;line-height:1.05;letter-spacing:-.012em;max-width:22em}
+.block .dek{font-size:1.15rem;line-height:1.5;max-width:38em;margin-top:1rem}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(15rem,21rem);gap:clamp(1.5rem,4vw,3.5rem);margin-top:2rem;align-items:start}
+.prose{display:flex;flex-direction:column;gap:1rem;max-width:36em}
+.prose h3{font-size:1rem;font-weight:700;letter-spacing:.01em;margin-top:.6rem}
+
+/* fiche technique */
+.fiche{margin:0;border-top:2px solid var(--ink);font-size:.93rem;line-height:1.4}
+.fiche div{display:grid;grid-template-columns:7.2rem minmax(0,1fr);gap:.75rem;padding:.55rem 0;border-bottom:1px solid var(--rule)}
+.fiche dt{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);padding-top:.18rem}
+.fiche dd{margin:0;font-variant-numeric:tabular-nums}
+
+/* plates */
+.plates{display:flex;flex-direction:column;gap:clamp(1.5rem,3vw,2.5rem);margin-top:clamp(2rem,4vw,3rem)}
+figure{margin:0}
+figcaption{font-size:.88rem;line-height:1.4;color:var(--ink-soft);margin-top:.7rem;max-width:44em}
+figcaption b{font-family:var(--display);font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-right:.5em}
+.zoom{display:block;padding:0;border:0;background:none;cursor:zoom-in;width:100%}
+.pages{display:grid;grid-template-columns:1fr 1fr;gap:0;box-shadow:var(--shadow);background:var(--plate)}
+.pages .zoom+.zoom{border-left:1px solid var(--rule)}
+.single{box-shadow:var(--shadow);background:var(--plate)}
+.two-up{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.5vw,2rem)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(.5rem,1.2vw,1rem)}
+.strip .zoom{box-shadow:var(--shadow);background:var(--plate)}
+.strip p{font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.06em;margin-top:.55rem;line-height:1.3}
+.strip p span{display:block;font-weight:400;color:var(--ink-soft);letter-spacing:0}
+.reel{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--plate);box-shadow:var(--shadow)}
+.boucle{max-width:24rem}
+.loop{display:block;width:100%;height:auto;aspect-ratio:4/5;background:var(--plate);box-shadow:var(--shadow)}
+.swatch{display:inline-block;width:.7em;height:.7em;border-radius:50%;margin-right:.45em;vertical-align:baseline}
+
+/* chemin de fer */
+.cdf{display:flex;flex-wrap:wrap;gap:.9rem .7rem;padding:1.25rem;background:var(--plate);border:1px solid var(--rule)}
+.cdf .pair{display:flex;flex-direction:column;gap:.3rem}
+.cdf .pp{display:flex;border:1px solid var(--rule)}
+.cdf img{width:46px;height:auto}
+.cdf .pp img+img{border-left:1px solid var(--rule)}
+.cdf span{font-family:var(--display);font-size:.6rem;color:var(--ink-soft);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+
+/* three images */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.75rem,2vw,1.5rem)}
+.three .zoom,.frame{background:var(--plate);box-shadow:var(--shadow)}
+.three figcaption{margin-top:.6rem}
+.affiche-row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(1rem,2.5vw,2rem);align-items:start}
+.affiche-row .side{display:flex;flex-direction:column;gap:clamp(1rem,2.5vw,2rem)}
+
+/* teaching */
+.tablewrap{overflow-x:auto;margin-top:2rem}
+table{border-collapse:collapse;width:100%;min-width:38rem;font-size:.93rem;font-variant-numeric:tabular-nums}
+caption{caption-side:bottom;text-align:left;font-size:.85rem;color:var(--ink-soft);padding-top:.7rem}
+th{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);text-align:left;padding:.55rem .75rem .55rem 0;border-bottom:2px solid var(--ink)}
+td{padding:.6rem .75rem .6rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.num,th.num{text-align:right;padding-right:0;white-space:nowrap}
+td.num+td.num,th.num+th.num{padding-left:1.25rem}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);margin-top:2rem}
+.figs div{padding:1rem 1.25rem 0 0}
+.figs div+div{border-left:1px solid var(--rule);padding-left:1.25rem}
+.figs strong{display:block;font-family:var(--display);font-weight:800;font-stretch:85%;font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums}
+.figs p{font-size:.92rem;line-height:1.4;margin-top:.4rem;color:var(--ink-soft)}
+.principes{list-style:none;margin:0;padding:0;counter-reset:p;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,3vw,2.5rem);margin-top:2rem}
+.principes li{counter-increment:p;border-top:1px solid var(--ink);padding-top:.8rem;font-size:.98rem;line-height:1.5}
+.principes li::before{content:counter(p,decimal-leading-zero);display:block;font-family:var(--display);font-weight:700;font-size:.75rem;letter-spacing:.1em;color:var(--accent);margin-bottom:.4rem}
+.principes strong{font-family:var(--display);font-weight:700;display:block;margin-bottom:.25rem}
+.etu{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(.5rem,1.2vw,1rem);margin-top:1rem}
+.etu img{width:100%;aspect-ratio:7/10;object-fit:cover;box-shadow:var(--shadow)}
+.etu p{font-size:.78rem;line-height:1.3;color:var(--ink-soft);margin-top:.45rem}
+
+/* parcours */
+.cv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.5rem,4vw,3.5rem);margin-top:2rem}
+.cv h3{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);padding-bottom:.6rem;border-bottom:2px solid var(--ink)}
+.cv ul{list-style:none;margin:0;padding:0}
+.cv li{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--rule);font-size:.95rem;line-height:1.42}
+.cv li time{font-family:var(--display);font-size:.8rem;font-weight:600;color:var(--ink-soft);font-variant-numeric:tabular-nums;padding-top:.1rem}
+.cv li span{color:var(--ink-soft)}
+
+/* contact */
+.contact{background:var(--ink);color:var(--paper);border-top:0}
+.contact .label{color:inherit;opacity:.65}
+.contact h2{font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:800;font-stretch:88%;line-height:1;margin:.8rem 0 1.6rem}
+.contact dl{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem 2rem;border-top:1px solid color-mix(in srgb,var(--paper) 30%,transparent);padding-top:1.25rem}
+.contact dt{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.65}
+.contact dd{margin:.25rem 0 0;font-size:1.02rem;overflow-wrap:anywhere}
+.contact a:hover{color:inherit;text-decoration-thickness:2px}
+.contact .fin{margin-top:2.5rem;font-size:.82rem;opacity:.6}
+
+/* viewer */
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:96vh}
+dialog::backdrop{background:rgba(12,13,15,.86)}
+dialog img{max-width:96vw;max-height:88vh;width:auto;height:auto;background:#fff}
+dialog form{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:.6rem;color:#f2f1ec}
+dialog p{font-size:.85rem;line-height:1.35}
+dialog button{font-family:var(--display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:#f2f1ec;color:#16171a;border:0;padding:.55rem .9rem;cursor:pointer;flex:none}
+
+@media (max-width:60rem){
+  .spread{grid-template-columns:minmax(0,1fr)}
+  .margin .stick{position:static;flex-direction:row;align-items:baseline;gap:1rem}
+  .folio{font-size:2.4rem}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .reperes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .reperes div:nth-child(3){border-left:0;padding-left:0}
+  .reperes div:nth-child(n+3){margin-top:1rem;border-top:1px solid var(--rule)}
+  .etu{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .principes,.cv{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:40rem){
+  body{font-size:1rem}
+  .opening .grid{grid-template-columns:minmax(0,1fr)}
+  .opening .cover{justify-self:start;max-width:14rem}
+  .reperes,.figs{grid-template-columns:minmax(0,1fr)}
+  .reperes div,.reperes div+div,.figs div,.figs div+div{border-left:0;padding-left:0;margin-top:0;border-top:0}
+  .reperes div+div,.figs div+div{border-top:1px solid var(--rule);margin-top:1rem}
+  .strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .three,.two-up,.affiche-row{grid-template-columns:minmax(0,1fr)}
+  .contact dl{grid-template-columns:minmax(0,1fr)}
+  .fiche div{grid-template-columns:6.2rem minmax(0,1fr)}
+  .cdf img{width:34px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="#haut">Esma Unsal-Laratte, Ph.D.</a>
+    <nav aria-label="Sections">
+      <a href="#catalogue">Catalogue</a>
+      <a href="#figures">Figures</a>
+      <a href="#identite">Identité imprimée</a>
+      <a href="#exlibris">Ex-libris augmenté</a>
+      <a href="#enseignement">Enseignement</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="haut">
+
+<div class="opening">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <p class="label"><b>Portfolio</b> · Design d'édition · Chaîne graphique · Enseignement</p>
+        <h1>Le livre,<br>de la grille<br><em>à la presse.</em></h1>
+        <p class="lede">Je conçois des objets éditoriaux et j'ai enseigné pendant seize ans, à l'université, la typographie, la mise en page et les procédés d'impression. Ce portfolio réunit trois projets de 2026, un projet de recherche-création et un bilan de ces années d'enseignement.</p>
+      </div>
+      <figure class="cover">
+        <button class="zoom single" type="button" data-full="img/cat-p01.jpg" data-cap="Le catalogue d'exposition, couverture. Épreuve, novembre 2026."><img src="img/cat-p01.jpg" width="886" height="1300" alt="Couverture du catalogue : titre en rouge et noir au-dessus d'une mosaïque de photographies de l'installation"></button>
+        <figcaption><b>Projet 01</b>Couverture du catalogue d'exposition, 150 × 220 mm.</figcaption>
+      </figure>
+    </div>
+
+    <div class="reperes">
+      <div><p class="label">Formation</p><p>Maîtrise en technologies de l'édition et de l'impression (Université de Marmara) ; doctorat en cotutelle, Université Bordeaux Montaigne et Université Gazi.</p></div>
+      <div><p class="label">Enseignement</p><p>Chargée d'enseignement de 2007 à 2023 : typographie, conception de pages, conception du livre, techniques d'impression.</p></div>
+      <div><p class="label">Pratique récente</p><p>Catalogue d'exposition de 40 pages, système de figures pour un ouvrage aux PUQ, identité imprimée d'une installation (2026).</p></div>
+      <div><p class="label">Chaîne graphique</p><p>Prépresse, offset, flexographie, impression numérique, sérigraphie, gravure ; normes de qualité ISO 12647.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 -->
+<section id="catalogue">
+  <div class="wrap spread">
+    <div class="margin"><div class="stick"><span class="folio">01</span><span class="label">Design d'édition<br>Catalogue · 2026–2027</span></div></div>
+    <div class="block">
+      <h2>Le catalogue d'exposition : donner une forme de livre à une installation</h2>
+      <p class="dek">Conception graphique du premier livre issu de l'installation <em>De l'expression du rapport au travail des professeures : exposition en cours</em>, présentée au 9<sup>e</sup> Congrès international des recherches féministes dans la francophonie (Université Laval, 20 août 2026).</p>
+
+      <div class="cols">
+        <div class="prose">
+          <p>Le catalogue réunit les écrits et les œuvres de cinq professeures. Il devait garder la trace d'un accrochage éphémère sans le reproduire tel quel : passer du mur à la page, du parcours dans une salle à une suite de doubles pages.</p>
+          <h3>Un système plutôt qu'une suite de pages</h3>
+          <p>Chaque autrice reçoit une couleur, qui porte sa section du début à la fin. Toutes les sections s'ouvrent de la même façon : un ex-libris gravé à son nom, le cartel de l'œuvre, un grand chiffre et une courte citation. Le pied de page reprend partout le même titre courant en trois parties (autrice, œuvre, événement) et le folio.</p>
+          <h3>Le fil rouge</h3>
+          <p>Dans la salle, un fil de laine rouge reliait les tables au mur des écrits. Dans le livre, il devient un trait dessiné qui court au bas de chaque page, se noue, se dénoue et traverse le pli.</p>
+          <h3>Avant l'impression</h3>
+          <p>Le document présenté ici est une épreuve de lecture. Les étapes à venir sont celles de la préparation à l'impression : conversion des couleurs en CMJN selon le profil de l'imprimeur, fonds perdus de 3 mm pour les aplats à bord vif, texte vectoriel, épreuve contractuelle et choix du papier.</p>
+        </div>
+        <dl class="fiche">
+          <div><dt>Titre</dt><dd><em>Le catalogue d'exposition</em> (Livre 1)</dd></div>
+          <div><dt>Direction</dt><dd>Claire Moreau, professeure, Université de Sherbrooke</dd></div>
+          <div><dt>Conception</dt><dd>Esma Unsal-Laratte</dd></div>
+          <div><dt>Œuvres</dt><dd>Claire Moreau, Karyne Gamelin, Emmanuelle Doré, Virginie Thériault, Brigitte Gagnon</dd></div>
+          <div><dt>Format</dt><dd>150 × 220 mm, à la française</dd></div>
+          <div><dt>Pagination</dt><dd>40 pages, couleurs</dd></div>
+          <div><dt>État</dt><dd>Épreuve, novembre 2026</dd></div>
+          <div><dt>Parution</dt><dd>Prévue en 2027, maison d'édition à confirmer</dd></div>
+          <div><dt>Outil</dt><dd>Adobe Illustrator</dd></div>
+          <div><dt>Soutien</dt><dd>CRSH, Développement Savoir (2023-2025)</dd></div>
+        </dl>
+      </div>
+
+      <div class="plates">
+        <figure>
+          <div class="pages">
+            <button class="zoom" type="button" data-full="img/cat-p02.jpg" data-cap="Page 2, générique du catalogue."><img src="img/cat-p02.jpg" width="886" height="1300" loading="lazy" alt="Page de générique : direction du projet, conception, année de publication, maison d'édition"></button>
+            <button class="zoom" type="button" data-full="img/cat-p03.jpg" data-cap="Page 3, ouverture."><img src="img/cat-p03.jpg" width="886" height="1300" loading="lazy" alt="Page d'ouverture : dessin au trait d'une professeure sur un grand cercle rouge, titre vertical Exposition en cours"></button>
+          </div>
+          <figcaption><b>Pages 2–3</b>Générique et ouverture. Le dessin au trait de l'affiche devient l'image du livre.</figcaption>
+        </figure>
+
+        <figure>
+          <div class="pages">
+            <button class="zoom" type="button" data-full="img/cat-p06.jpg" data-cap="Page 6, l'affiche de l'installation reproduite dans le catalogue."><img src="img/cat-p06.jpg" width="886" height="1300" loading="lazy" alt="Reproduction de l'affiche de l'installation sur fond rouge et blanc"></button>
+            <button class="zoom" type="button" data-full="img/cat-p07.jpg" data-cap="Page 7, ouverture de la section 1, # Profe, Claire Moreau."><img src="img/cat-p07.jpg" width="886" height="1300" loading="lazy" alt="Ouverture de la première section en violet avec un ex-libris gravé et le cartel de l'œuvre"></button>
+          </div>
+          <figcaption><b>Pages 6–7</b>L'affiche de l'installation, puis l'ouverture de la première section : ex-libris, cartel, chiffre et citation.</figcaption>
+        </figure>
+
+        <figure>
+          <div class="strip">
+            <div><button class="zoom" type="button" data-full="img/cat-p07.jpg" data-cap="Section 1, # Profe, Claire Moreau."><img src="img/cat-p07.jpg" width="886" height="1300" loading="lazy" alt="Ouverture de la section 1, violet"></button><p><span class="swatch" style="background:#8e7fb5"></span>1 # Profe<span>Claire Moreau</span></p></div>
+            <div><button class="zoom" type="button" data-full="img/cat-p19.jpg" data-cap="Section 2, # Ma place, Karyne Gamelin."><img src="img/cat-p19.jpg" width="886" height="1300" loading="lazy" alt="Ouverture de la section 2, vert"></button><p><span class="swatch" style="background:#2f5d45"></span>2 # Ma place<span>Karyne Gamelin</span></p></div>
+            <div><button class="zoom" type="button" data-full="img/cat-p23.jpg" data-cap="Section 3, # Aimantation, Emmanuelle Doré."><img src="img/cat-p23.jpg" width="886" height="1300" loading="lazy" alt="Ouverture de la section 3, bleu nuit"></button><p><span class="swatch" style="background:#1c2452"></span>3 # Aimantation<span>Emmanuelle Doré</span></p></div>
+            <div><button class="zoom" type="button" data-full="img/cat-p28.jpg" data-cap="Section 4, # Poids suspendus, Virginie Thériault."><img src="img/cat-p28.jpg" width="886" height="1300" loading="lazy" alt="Ouverture de la section 4, ocre"></button><p><span class="swatch" style="background:#d9a521"></span>4 # Poids suspendus<span>Virginie Thériault</span></p></div>
+            <div><button class="zoom" type="button" data-full="img/cat-p32.jpg" data-cap="Section 5, # Grandir en conscience avec les autres, Brigitte Gagnon."><img src="img/cat-p32.jpg" width="886" height="1300" loading="lazy" alt="Ouverture de la section 5, corail"></button><p><span class="swatch" style="background:#e89a78"></span>5 # Grandir en conscience<span>Brigitte Gagnon</span></p></div>
+          </div>
+          <figcaption><b>Cinq ouvertures</b>Même construction, cinq couleurs : la lectrice sait toujours dans quelle section elle se trouve.</figcaption>
+        </figure>
+
+        <figure>
+          <div class="pages">
+            <button class="zoom" type="button" data-full="img/cat-p20.jpg" data-cap="Page 20, Perfection, Karyne Gamelin."><img src="img/cat-p20.jpg" width="886" height="1300" loading="lazy" alt="Photographie à bord vif d'un jeu de société, titre Perfection et texte sur deux colonnes"></button>
+            <button class="zoom" type="button" data-full="img/cat-p21.jpg" data-cap="Page 21, View-Master, Karyne Gamelin."><img src="img/cat-p21.jpg" width="886" height="1300" loading="lazy" alt="Photographie d'une visionneuse, aplat vert et titre vertical View-Master"></button>
+          </div>
+          <figcaption><b>Pages 20–21</b>Pages d'œuvres : photographie à bord vif à gauche, image habillée et titre vertical à droite. Le vert de la section relie les deux pages.</figcaption>
+        </figure>
+
+        <figure>
+          <div class="pages">
+            <button class="zoom" type="button" data-full="img/cat-p24.jpg" data-cap="Page 24, Cadrage, Emmanuelle Doré."><img src="img/cat-p24.jpg" width="886" height="1300" loading="lazy" alt="Reproduction d'une affiche de film intitulée Cadrage, titre vertical bleu"></button>
+            <button class="zoom" type="button" data-full="img/cat-p25.jpg" data-cap="Page 25, Plus d'ordre qu'il n'en faut, Emmanuelle Doré."><img src="img/cat-p25.jpg" width="886" height="1300" loading="lazy" alt="Reproduction d'une affiche de film sur une bande bleu nuit"></button>
+          </div>
+          <figcaption><b>Pages 24–25</b>Quatre affiches de films d'Emmanuelle Doré, numérotées 1/4 à 4/4. La mise en page change de rythme à chaque page sans quitter la grille.</figcaption>
+        </figure>
+
+        <figure>
+          <div class="pages">
+            <button class="zoom" type="button" data-full="img/cat-p36.jpg" data-cap="Page 36, vue de l'exposition."><img src="img/cat-p36.jpg" width="886" height="1300" loading="lazy" alt="Vue du mur des écrits et de la boîte rouge, aplat rouge avec le titre Exposition en cours"></button>
+            <button class="zoom" type="button" data-full="img/cat-p37.jpg" data-cap="Page 37, vues de l'exposition."><img src="img/cat-p37.jpg" width="886" height="1300" loading="lazy" alt="Deux photographies de l'installation décalées sur un cercle rouge"></button>
+          </div>
+          <figcaption><b>Pages 36–37</b>Cahier final : les vues de l'accrochage, le fil rouge retrouvé dans la salle.</figcaption>
+        </figure>
+
+        <figure>
+          <div class="cdf" id="cdf" aria-label="Chemin de fer du catalogue, 40 pages"></div>
+          <figcaption><b>Chemin de fer</b>Les 40 pages en doubles : ouverture en rouge, cinq sections en couleur, retour au rouge pour le cahier final.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="figures">
+  <div class="wrap spread">
+    <div class="margin"><div class="stick"><span class="folio">02</span><span class="label">Illustration éditoriale<br>Système de figures · 2026</span></div></div>
+    <div class="block">
+      <h2>Treize figures pour un ouvrage universitaire</h2>
+      <p class="dek">Conception d'un système d'illustrations pour l'ouvrage de Karyne Gamelin sur les rencontres d'équipes éducatives, à paraître aux Presses de l'Université du Québec.</p>
+
+      <div class="cols">
+        <div class="prose">
+          <p>La commande portait sur treize figures et quatre icônes de section, réparties dans les quatre parties du livre. Les contraintes étaient celles de l'édition savante : reproduction en noir et blanc, lisibilité en petit format, texte modifiable par l'éditeur, cohérence d'un chapitre à l'autre.</p>
+          <p>J'ai présenté trois propositions, trois langages pour une même structure argumentative. Les oiseaux reprennent un trait fin : deux personnages en dialogue, un fil qui se noue entre eux. Les schémas traduisent les concepts en pictogrammes, spirales et trames. Les pandas transposent l'abstraction en scènes narratives, plus accessibles pour un lectorat de premier cycle.</p>
+          <p>Une seconde commande, pour un article du Réseau d'information pour la réussite éducative, a donné une infographie en trois versions : même structure en trois colonnes, trois registres visuels, pour que les autrices choisissent le ton qui convient à la revue.</p>
+        </div>
+        <dl class="fiche">
+          <div><dt>Ouvrage</dt><dd>Gamelin, K. (sous presse). <em>Et si on parlait des rencontres d'équipes éducatives ? Soutien au développement d'une pensée stratégique.</em> Presses de l'Université du Québec.</dd></div>
+          <div><dt>Corpus</dt><dd>13 figures (1.1 à 4.2), 4 icônes de section</dd></div>
+          <div><dt>Contraintes</dt><dd>Noir et blanc, petit format, texte modifiable</dd></div>
+          <div><dt>Article</dt><dd>Gamelin, K. et Sénéchal, R. (accepté). <em>Le travail émotionnel : une stratégie pour mobiliser son équipe.</em> RIRE.</dd></div>
+          <div><dt>Année</dt><dd>2026</dd></div>
+        </dl>
+      </div>
+
+      <div class="plates">
+        <div class="three">
+          <figure><button class="zoom" type="button" data-full="img/puq-oiseaux.jpg" data-cap="Proposition 1, oiseaux."><img src="img/puq-oiseaux.jpg" width="1000" height="667" loading="lazy" alt="Planche de figures au trait noir avec des oiseaux en dialogue"></button><figcaption><b>Proposition 1</b>Oiseaux</figcaption></figure>
+          <figure><button class="zoom" type="button" data-full="img/puq-schemas.jpg" data-cap="Proposition 2, schémas."><img src="img/puq-schemas.jpg" width="1000" height="779" loading="lazy" alt="Planche de figures composées de pictogrammes, spirales et trames"></button><figcaption><b>Proposition 2</b>Schémas</figcaption></figure>
+          <figure><button class="zoom" type="button" data-full="img/puq-pandas.jpg" data-cap="Proposition 3, pandas."><img src="img/puq-pandas.jpg" width="1000" height="667" loading="lazy" alt="Planche de figures avec des pandas dans des scènes narratives"></button><figcaption><b>Proposition 3</b>Pandas</figcaption></figure>
+        </div>
+        <div class="three">
+          <figure><button class="zoom" type="button" data-full="img/rire-1.jpg" data-cap="Infographie Trois types de travail émotionnel, version 1."><img src="img/rire-1.jpg" width="1400" height="813" loading="lazy" alt="Infographie en trois colonnes, version au trait noir et bleu"></button><figcaption><b>Infographie</b>Version 1</figcaption></figure>
+          <figure><button class="zoom" type="button" data-full="img/rire-2.jpg" data-cap="Infographie Trois types de travail émotionnel, version 2."><img src="img/rire-2.jpg" width="1400" height="813" loading="lazy" alt="Infographie en trois colonnes, version au lavis"></button><figcaption><b>Infographie</b>Version 2</figcaption></figure>
+          <figure><button class="zoom" type="button" data-full="img/rire-3.jpg" data-cap="Infographie Trois types de travail émotionnel, version 3."><img src="img/rire-3.jpg" width="1400" height="813" loading="lazy" alt="Infographie en trois colonnes, version noir et rouge"></button><figcaption><b>Infographie</b>Version 3</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="identite">
+  <div class="wrap spread">
+    <div class="margin"><div class="stick"><span class="folio">03</span><span class="label">Identité imprimée<br>Installation · 2026</span></div></div>
+    <div class="block">
+      <h2>Affiche, cartels et texte mural : une famille d'imprimés pour une installation</h2>
+      <p class="dek">Direction artistique et conception graphique de l'installation <em>De l'expression du rapport au travail des professeures</em>, recherche dirigée par Claire Moreau, CIRFF 2026, Université Laval.</p>
+
+      <div class="cols">
+        <div class="prose">
+          <p>L'identité repose sur un dessin au trait fin : une professeure dont le bras porte, comme des annotations manuscrites, les mots recueillis pendant la recherche. Autour de ce dessin, une seule hiérarchie typographique sert l'affiche, l'invitation, le texte mural et les cartels.</p>
+          <p>Douze écrits ont été composés, imprimés et accrochés au mur, chacun avec son cartel. C'est cette famille d'imprimés qui a ensuite fourni la matière et les règles du catalogue.</p>
+        </div>
+        <dl class="fiche">
+          <div><dt>Rôle</dt><dd>Direction artistique, conception graphique, commissariat</dd></div>
+          <div><dt>Livrables</dt><dd>Affiche A1, invitation, texte mural, cartels, panneau participatif, boucle vidéo de 15 s</dd></div>
+          <div><dt>Équipe</dt><dd>Claire Moreau (direction), Karyne Gamelin, Emmanuelle Doré, Virginie Thériault</dd></div>
+          <div><dt>Lieu</dt><dd>Pavillon Charles-De Koninck, Université Laval, 20 août 2026</dd></div>
+        </dl>
+      </div>
+
+      <div class="plates">
+        <div class="affiche-row">
+          <figure><button class="zoom frame" type="button" data-full="img/cirff-affiche.jpg" data-cap="Affiche de l'installation, format A1."><img src="img/cirff-affiche.jpg" width="1100" height="1557" loading="lazy" alt="Affiche : titre en capitales, dessin au trait d'une professeure, date du 20 août 2026"></button><figcaption><b>Affiche</b>Format A1.</figcaption></figure>
+          <div class="side">
+            <figure><button class="zoom frame" type="button" data-full="img/cirff-mur.jpg" data-cap="Vue d'ensemble du mur : affiche, texte mural et douze écrits reliés par un fil rouge."><img src="img/cirff-mur.jpg" width="1400" height="933" loading="lazy" alt="Mur blanc où sont accrochés l'affiche, le texte mural et douze écrits reliés par un fil rouge"></button><figcaption><b>Mur des écrits</b>Affiche, texte mural et douze écrits reliés par un fil rouge.</figcaption></figure>
+            <figure><button class="zoom frame" type="button" data-full="img/cirff-cartels.jpg" data-cap="Écrits imprimés et leur cartel."><img src="img/cirff-cartels.jpg" width="900" height="600" loading="lazy" alt="Détail de deux écrits imprimés et de leur cartel"></button><figcaption><b>Détail</b>Deux écrits et leur cartel.</figcaption></figure>
+          </div>
+        </div>
+        <figure class="boucle">
+          <video class="loop" controls muted loop playsinline preload="metadata" poster="img/cirff-boucle-poster.jpg" aria-label="Boucle animée de 15 secondes de l'affiche">
+            <source src="img/cirff-boucle.mp4" type="video/mp4">
+          </video>
+          <figcaption><b>Affiche en mouvement</b>Boucle de 15 secondes (1080 × 1350) pour écrans et réseaux : les mots recueillis pendant la recherche apparaissent un à un. Sans son.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="exlibris">
+  <div class="wrap spread">
+    <div class="margin"><div class="stick"><span class="folio">04</span><span class="label">Imprimé et écran<br>Thèse · 2017–2021</span></div></div>
+    <div class="block">
+      <h2>L'ex-libris augmenté : quand l'imprimé se prolonge à l'écran</h2>
+      <p class="dek">Réinterprétation de l'ex-libris par l'animation et la réalité augmentée, au cœur de ma thèse de doctorat « Ex-libris expérimental » (Université Bordeaux Montaigne et Université Gazi).</p>
+
+      <div class="cols">
+        <div class="prose">
+          <p>L'ex-libris est la plus petite forme d'édition : une estampe collée dans un livre pour dire à qui il appartient. J'ai dessiné une série de portraits imprimés, puis je les ai prolongés à l'écran.</p>
+          <p>Scanné avec un téléphone, l'ex-libris imprimé s'ouvre sur un portrait animé. L'objet reste une image imprimée, liée à la matérialité du livre ; il devient aussi une interface, à l'échelle d'une main.</p>
+          <p>Ce travail nourrit mon enseignement : une même identité graphique doit tenir sur le papier et à l'écran, et chaque support a ses propres règles de lisibilité.</p>
+        </div>
+        <dl class="fiche">
+          <div><dt>Corpus</dt><dd>Sept ex-libris portraits, trois ex-libris en réalité augmentée, trois brochures vidéo animées, carte USB interactive</dd></div>
+          <div><dt>Techniques</dt><dd>Illustration vectorielle, animation 2D/3D, réalité augmentée mobile</dd></div>
+          <div><dt>Diffusion</dt><dd><em>International Journal of Exlibris</em> (2019) ; <em>International Journal of Social Sciences</em> (2023) ; exposition Ex Amore Ruse, Sofia (2014)</dd></div>
+        </dl>
+      </div>
+
+      <div class="plates">
+        <figure>
+          <video class="reel" controls muted playsinline preload="metadata" poster="img/reel-poster.jpg" aria-label="Reel de 30 secondes : ex-libris augmentés et animés, affiche en mouvement">
+            <source src="img/reel.mp4" type="video/mp4">
+          </video>
+          <figcaption><b>Reel · 30 s</b>Ex-libris augmentés et animés (2018–2021), puis l'affiche en mouvement de l'installation (2026). Sans son.</figcaption>
+        </figure>
+        <figure>
+          <div class="strip">
+            <div><button class="zoom" type="button" data-full="img/exl-pektas.jpg" data-cap="Ex-libris portrait, Hasip Pektaş."><img src="img/exl-pektas.jpg" width="302" height="302" loading="lazy" alt="Ex-libris portrait en aplats gris sur fond sombre"></button><p>Hasip Pektaş</p></div>
+            <div><button class="zoom" type="button" data-full="img/exl-oz-pektas.jpg" data-cap="Ex-libris portrait, Hatice Öz Pektaş."><img src="img/exl-oz-pektas.jpg" width="302" height="302" loading="lazy" alt="Ex-libris portrait en aplats roses et orangés sur fond violet"></button><p>Hatice Öz Pektaş</p></div>
+            <div><button class="zoom" type="button" data-full="img/exl-esma.jpg" data-cap="Ex-libris portrait, Esma Unsal-Laratte."><img src="img/exl-esma.jpg" width="402" height="402" loading="lazy" alt="Ex-libris autoportrait en aplats turquoise sur fond bleu nuit"></button><p>Esma Unsal-Laratte</p></div>
+            <div><button class="zoom" type="button" data-full="img/exl-gokcearslan.jpg" data-cap="Ex-libris portrait, Armağan Gökçearslan."><img src="img/exl-gokcearslan.jpg" width="378" height="378" loading="lazy" alt="Ex-libris portrait entouré de lignes de constellation"></button><p>Armağan Gökçearslan</p></div>
+            <div><button class="zoom" type="button" data-full="img/exl-bessard.jpg" data-cap="Ex-libris portrait, Olivier Bessard-Banquy."><img src="img/exl-bessard.jpg" width="402" height="402" loading="lazy" alt="Ex-libris portrait en aplats roses sur fond bordeaux"></button><p>Olivier Bessard-Banquy</p></div>
+          </div>
+          <figcaption><b>Ex-libris portraits</b>Cinq des sept portraits de la série, dessinés pour l'impression.</figcaption>
+        </figure>
+        <div class="three">
+          <figure><button class="zoom frame" type="button" data-full="img/exl-ar-1.jpg" data-cap="Ex-libris en réalité augmentée, Hasip Pektaş, 2020."><img src="img/exl-ar-1.jpg" width="567" height="382" loading="lazy" alt="Téléphone tenu devant un ex-libris imprimé, un personnage animé apparaît à l'écran"></button><figcaption><b>Réalité augmentée</b>Hasip Pektaş, 2020</figcaption></figure>
+          <figure><button class="zoom frame" type="button" data-full="img/exl-ar-2.jpg" data-cap="Ex-libris en réalité augmentée, Hatice Öz Pektaş."><img src="img/exl-ar-2.jpg" width="556" height="461" loading="lazy" alt="Téléphone tenu devant un ex-libris imprimé, portrait animé à l'écran"></button><figcaption><b>Réalité augmentée</b>Hatice Öz Pektaş</figcaption></figure>
+          <figure><button class="zoom frame" type="button" data-full="img/exl-ar-3.jpg" data-cap="Ex-libris en réalité augmentée, Esma Unsal-Laratte."><img src="img/exl-ar-3.jpg" width="603" height="495" loading="lazy" alt="Téléphone tenu devant un ex-libris imprimé, autoportrait animé à l'écran"></button><figcaption><b>Réalité augmentée</b>Esma Unsal-Laratte</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Enseignement -->
+<section id="enseignement">
+  <div class="wrap spread">
+    <div class="margin"><div class="stick"><span class="folio">05</span><span class="label">Enseignement<br>2007–2023</span></div></div>
+    <div class="block">
+      <h2>Seize années d'atelier, entre la page et la presse</h2>
+      <p class="dek">De 2007 à 2023, j'ai été chargée d'enseignement à l'Université Istanbul Aydın puis à l'Université Ondokuz Mayıs, dans les départements Impression &amp; Publication et Design graphique. J'y ai donné des cours de conception éditoriale et de mise en page (journal, périodique), de conception du livre, de typographie et de techniques d'impression.</p>
+
+      <div class="figs">
+        <div><strong>7 784 h</strong><p>d'enseignement théorique, 2007-2023</p></div>
+        <div><strong>2 744 h</strong><p>de travaux pratiques en atelier</p></div>
+        <div><strong>90 à 98 %</strong><p>de satisfaction aux évaluations institutionnelles des cours</p></div>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <caption>Cours les plus proches du design d'édition et de la chaîne graphique. Évaluations institutionnelles, moyennes sur les périodes d'enseignement.</caption>
+          <thead><tr><th>Cours</th><th>Forme</th><th>Sessions</th><th class="num">Cours</th><th class="num">Enseignante</th></tr></thead>
+          <tbody>
+            <tr><td>Conception de pages et mise en page</td><td>Atelier, 56 h</td><td>2010-2015, 2018-2023</td><td class="num">90,01 %</td><td class="num">100 %</td></tr>
+            <tr><td>Typographie et calligraphie</td><td>Atelier, 42 h</td><td>2010-2015</td><td class="num">95,07 %</td><td class="num">98,01 %</td></tr>
+            <tr><td>Théorie des couleurs et reproduction</td><td>Cours, 56 h</td><td>2007-2015</td><td class="num">97,06 %</td><td class="num">99,04 %</td></tr>
+            <tr><td>Préparation de projets</td><td>Cours, 56 h</td><td>2007-2015, 2018-2023</td><td class="num">98,08 %</td><td class="num">100 %</td></tr>
+            <tr><td>Techniques générales d'impression</td><td>Cours, 56 h</td><td>2007-2015, 2018-2023</td><td class="num">96,07 %</td><td class="num">100 %</td></tr>
+            <tr><td>Systèmes d'impression numérique et flexographique</td><td>Atelier, 56 h</td><td>2007-2015, 2018-2022</td><td class="num">90,07 %</td><td class="num">98,08 %</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ol class="principes">
+        <li><strong>Un système avant une page</strong>Les étudiantes et étudiants conçoivent d'abord la grille, la hiérarchie et les styles, puis les éprouvent sur plusieurs pages. Une belle double page ne fait pas un livre.</li>
+        <li><strong>La critique comme méthode</strong>Chaque étape passe au mur : chemin de fer, gabarits, épreuves. Le groupe apprend à nommer ce qu'il voit et à justifier un choix typographique.</li>
+        <li><strong>Jusqu'au fichier d'impression</strong>Un projet se termine avec un fichier prêt pour l'imprimeur : formats, fonds perdus, couleurs, papier, façonnage. La chaîne graphique fait partie du design.</li>
+      </ol>
+
+      <div class="plates">
+        <figure>
+          <p class="label">Travaux d'étudiantes et d'étudiants encadrés en atelier</p>
+          <div class="etu">
+            <div><img src="img/etu-izmir.jpg" width="294" height="420" loading="lazy" alt="Affiche d'étudiant pour un festival de jazz, lettrage manuscrit sur fond orange"><p>Festival de jazz d'Izmir</p></div>
+            <div><img src="img/etu-istanbul.jpg" width="294" height="420" loading="lazy" alt="Affiche d'étudiant pour un festival de musique, lettrage dessiné sur fond rouge"><p>Festival de musique d'Istanbul</p></div>
+            <div><img src="img/etu-clavi.jpg" width="294" height="420" loading="lazy" alt="Affiche d'étudiant pour un festival de piano, touches en noir et blanc"><p>Clavi Cologne</p></div>
+            <div><img src="img/etu-dali.jpg" width="220" height="308" loading="lazy" alt="Affiche d'étudiant pour une exposition Dalí, lettrage en volume sur fond rouge"><p>Exposition Salvador Dalí</p></div>
+            <div><img src="img/etu-dyslexie.jpg" width="294" height="420" loading="lazy" alt="Affiche d'étudiant sur la dyslexie, lettres inversées tracées à la craie"><p>Dyslexie, sensibilisation</p></div>
+            <div><img src="img/etu-deichmann.jpg" width="294" height="420" loading="lazy" alt="Affiche d'étudiant, empreinte de chaussure composée de lettres"><p>Empreinte typographique</p></div>
+          </div>
+          <figcaption>Affiches réalisées dans les ateliers de typographie et d'applications de conception graphique.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Parcours -->
+<section id="parcours">
+  <div class="wrap spread">
+    <div class="margin"><div class="stick"><span class="folio">06</span><span class="label">Parcours</span></div></div>
+    <div class="block">
+      <h2>Formation, pratique et chaîne graphique</h2>
+      <div class="cv">
+        <div>
+          <h3>Formation</h3>
+          <ul>
+            <li><time>2017–2021</time><div>Doctorat en cotutelle, Université Bordeaux Montaigne et Université Gazi. <span>Thèse : « Ex-libris expérimental ».</span></div></li>
+            <li><time>2007–2009</time><div>Maîtrise de recherche en technologies de l'édition et de l'impression, Université de Marmara. <span>Mémoire sur l'impression flexographique des étiquettes.</span></div></li>
+            <li><time>2002–2006</time><div>Licence en enseignement des technologies de l'édition et de l'impression, Université de Marmara.</div></li>
+            <li><time>2000–2002</time><div>Diplôme en technologies d'impression et de publication, Université Ondokuz Mayıs.</div></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Pratique et enseignement</h3>
+          <ul>
+            <li><time>2026–</time><div>Professionnelle de recherche, Faculté de médecine, Université Laval. <span>Dispositifs pédagogiques visuels, projet Humanités en santé.</span></div></li>
+            <li><time>2026–</time><div>Conception graphique, installation et catalogue du CIRFF 2026 ; figures pour un ouvrage aux PUQ.</div></li>
+            <li><time>2025</time><div>Chargée de cours invitée, Rochester Institute of Technology. <span>Normes professionnelles et méthodologies de conception.</span></div></li>
+            <li><time>2007–2023</time><div>Chargée d'enseignement, Université Istanbul Aydın puis Université Ondokuz Mayıs.</div></li>
+            <li><time>2005–2006</time><div>Graphiste éditoriale, Association des fabricants d'emballages (ASD), Istanbul. <span>Catalogue de l'industrie turque de l'emballage.</span></div></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Chaîne graphique</h3>
+          <ul>
+            <li><time>Procédés</time><div>Offset, flexographie, impression numérique, sérigraphie, gravure, tampographie.</div></li>
+            <li><time>Prépresse</time><div>Préparation des fichiers, formes de découpe, contrôle de la reproduction des couleurs.</div></li>
+            <li><time>Normes</time><div>Communications sur ISO 12647-6 et les standards BRC/IOP, International Printing Technology Symposium, Istanbul.</div></li>
+            <li><time>2014–2019</time><div>Membre du jury, Concours international de conception et d'impression d'étiquettes, Istanbul.</div></li>
+            <li><time>Industrie</time><div>Partenariats pédagogiques avec Heidelberg, DuPont et Böttcher.</div></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Publications choisies</h3>
+          <ul>
+            <li><time>2026</time><div>« Introduction and Types of Paper Packaging », dans <em>Paper Packaging: Innovations, Sustainability and Applications</em>, Elsevier. <span>À paraître.</span></div></li>
+            <li><time>2026</time><div>« Augmented Bookplates: Giving the Ex-Libris a Voice », <em>Leonardo</em>, MIT Press. <span>Soumis, en évaluation.</span></div></li>
+            <li><time>2023</time><div>« Photographie et ex-libris », dans <em>Photographie et vidéographie</em>, Université Atatürk.</div></li>
+            <li><time>2019</time><div>« Experimental Exlibris and New Approaches », <em>International Journal of Exlibris</em>.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h2>Esma Unsal-Laratte, Ph.D.</h2>
+    <dl>
+      <div><dt>Courriel</dt><dd><a href="mailto:esmalaratte@gmail.com">esmalaratte@gmail.com</a></dd></div>
+      <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/esmalaratte">linkedin.com/in/esmalaratte</a></dd></div>
+      <div><dt>ORCID</dt><dd><a href="https://orcid.org/0000-0003-3581-8008">0000-0003-3581-8008</a></dd></div>
+    </dl>
+    <p class="fin">Québec, novembre 2026. Les œuvres et les textes reproduits appartiennent à leurs autrices ; le catalogue est présenté à l'état d'épreuve avant parution.</p>
+  </div>
+</section>
+
+</main>
+
+<dialog id="viewer" aria-label="Image agrandie">
+  <img id="viewer-img" src="" alt="">
+  <form method="dialog"><p id="viewer-cap"></p><button id="viewer-close" type="submit">Fermer</button></form>
+</dialog>
+
+<script>
+(function(){
+  // chemin de fer : couverture seule, puis doubles pages 2-3 … 38-39, puis 40 seule
+  var cdf=document.getElementById('cdf');
+  function pad(n){return (n<10?'0':'')+n}
+  function pair(a,b){
+    var d=document.createElement('div');d.className='pair';
+    var pp=document.createElement('div');pp.className='pp';
+    [a,b].forEach(function(n){
+      if(!n)return;
+      var i=document.createElement('img');i.src='img/cat-t'+pad(n)+'.jpg';i.width=46;i.height=68;i.loading='lazy';i.alt='Page '+n;pp.appendChild(i);
+    });
+    var s=document.createElement('span');s.textContent=b&&a?a+'–'+b:String(a||b);
+    d.appendChild(pp);d.appendChild(s);cdf.appendChild(d);
+  }
+  pair(1,0);
+  for(var p=2;p<40;p+=2){pair(p,p+1)}
+  pair(40,0);
+
+  // visionneuse
+  var dlg=document.getElementById('viewer'),img=document.getElementById('viewer-img'),cap=document.getElementById('viewer-cap');
+  document.querySelectorAll('.zoom').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(!dlg.showModal)return;
+      img.src=b.dataset.full;img.alt=b.querySelector('img').alt;cap.textContent=b.dataset.cap||'';
+      dlg.showModal();
+    });
+  });
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+})();
+</script>
+</body>
+</html>
